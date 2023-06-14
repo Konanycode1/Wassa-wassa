@@ -36,7 +36,7 @@
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="https://wassa.onrender.com/images/C:/fakepath/LOGO%20STS%202023.png" alt="">
+                  <img src="../assets/img/lg.png" alt="">
                   <span class="d-none d-lg-block">Wassa Wassa</span>
                 </a>
               </div>
@@ -49,7 +49,7 @@
                     <p class="text-center small">Bénéficiez de nos meilleure Marchant (e)</p>
                   </div>
 
-                  <form class="row g-3 needs-validation signup" novalidate>
+                  <form  class="row g-3 needs-validation " id="signup" novalidate>
                     <div class="col-6 col-md-6 col-sm-6 col-xl-6">
                       <label for="compagnie" class="form-label">Compagnie</label>
                       <input type="text" name="compagnie" class="form-control" id="compagnie" required>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-6 col-md-6 col-sm-6">
                       <label for="commune" class="form-label">Commune</label>
-                      <input type="email" name="commune" class="form-control" id="commune" required>
+                      <input type="text" name="commune" class="form-control" id="commune" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
@@ -98,9 +98,9 @@
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
                     <div class="col-12 ">
-                      <button class="btn btn-primary w-100 btnSign" type="submit">Créer votre compte</button>
+                      <button class="btn btn-primary w-100" id="btnSign" type="submit">Créer votre compte</button>
                     </div>
-                    <p class="text-center msg"></p>
+                    
                     <div class="col-12">
                       <p class="small mb-0">Vous avez dèjà un compte? <a href="../loginComp.html">Connectez-vous</a></p>
                     </div>
@@ -108,6 +108,23 @@
 
                 </div>
               </div>
+              <!-- <button id="buttonDialog">
+                OPEN DIALOG
+              </button> -->
+              <dialog id="basicDialog" class="dialog" role="dialog">
+                <div class="dialog-body">
+                  <button id="closeDialog">
+                    Close
+                  </button>
+              
+                  <div>
+                    <p class="text-white">Wassa Infos</p>
+                    <p class="text-white msg">
+                      In 2023, CSS and SCSS are both widely used in web development, but they serve different purposes and offer distinct advantages. CSS (Cascading Style Sheets) is a styling language used to add visual design to web pages, while SCSS (Sassy CSS) is a preprocessor that extends CSS with features like variables, nesting, and functions.
+                    </p>
+                  </div>
+                </div>
+              </dialog>
 
             </div>
           </div>

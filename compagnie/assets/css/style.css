@@ -11,6 +11,8 @@
 --------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
+  ---dialog : #012970;
+  --color-primary: #008374;
 }
 
 body {
@@ -981,6 +983,179 @@ h6 {
   margin: 0.25rem;
   font-size: 2.5rem;
 }
+@layer variables, reset, base, dialog;
+
+@layer dialog {
+  .dialog {
+    position: fixed;
+    inset: 0;
+    width: calc(60vh - 20vh);
+    height: calc(60vh - 30vh);
+    border: none;
+    border-radius: 25px;
+    background-color: var(--color-primary);
+
+    /* Animation only works with Chrome 116+ */
+    scale: 0;
+    opacity: 0;
+    transition: scale 300ms ease-in-out, opacity 150ms ease-in-out,
+      display ease-in-out 300ms;
+
+    &[open] {
+      /* Before changes */
+      @starting-style {
+        scale: 0.5;
+        opacity: 0;
+      }
+
+      /* Changing state */
+      scale: 1;
+      opacity: 1;
+    }
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    > .dialog-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: row;
+
+      & :nth-child(1 of p) {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      > div {
+        > p {
+          max-inline-size: 50ch;
+          text-wrap: balance;
+          line-height: 1.65;
+        }
+      }
+
+      > button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--color-primary );
+
+        &:hover {
+          background: var(--color-primary);
+        }
+
+        &:is(:focus, :active) {
+          background: var(--color-primary);
+        }
+      }
+    }
+  }
+}
+
+@layer base {
+  @layer layout {
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      background: var(--color-primary);
+      font-family: var(--theme-primary-font);
+    }
+  }
+
+  @layer button {
+    button {
+      border-radius: 50px;
+      background: var(---dialog );
+      color: var(--theme-black);
+      font-weight: 800;
+      font-family: var(--theme-primary-font);
+      border: none;
+      padding-inline: 2rem;
+      padding-block: 1rem;
+      cursor: pointer;
+      letter-spacing: 0.85px;
+
+      &:hover {
+        background: var(--color-primary );
+      }
+
+      &:is(:focus, :active) {
+        background: var(--theme-surface-a60);
+      }
+    }
+  }
+}
+
+/* Non-demo styles */
+@layer reset {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer variables {
+  :root {
+    --theme-primary: hsl(208, 77%, 73%);
+    /* BASIC COLORS */
+    --theme-on-primary: hsl(0, 0%, 100%);
+    --theme-white: hsl(0, 0%, 100%);
+    --theme-black: hsl(0, 0%, 96%);
+    /* SURFACE COLORS */
+    --theme-surface-a90: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 10%
+    );
+    --theme-surface-a80: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 20%
+    );
+    --theme-surface-a70: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 30%
+    );
+    --theme-surface-a60: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 40%
+    );
+    --theme-surface-a50: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 50%
+    );
+    --theme-surface-a40: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 60%
+    );
+    --theme-surface-a30: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 70%
+    );
+    --theme-surface-a20: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 80%
+    );
+    --theme-surface-a10: color-mix(
+      in srgb,
+      var(--theme-primary),
+      var(--theme-white) 90%
+    );
+    /* FONTS */
+    --theme-primary-font: "Plus Jakarta Sans";
+  }
+}
 
 .iconslist .label {
   font-family: var(--bs-font-monospace);
@@ -1209,6 +1384,7 @@ h6 {
     max-width: 50%;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Footer
