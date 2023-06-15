@@ -16,21 +16,39 @@ $(document).ready(()=>{
         }
         fetch(api,{
             method: "POST",
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type":"application/json"
+            }
         })
-        .then((response)=>response.json())
+        .then((response)=>{
+            localStorage.setItem("logStatus",response.status)
+            return response.json()
+        }
+        )
         .then((data)=>{
             dialog.showModal();
+            let statused = localStorage.getItem('logStatus')
+            console.log(data)
             $(".msg").text(data.msg).css('color', 'green')
+
+            if( statused == 201){
+                $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
+                localStorage.setItem("user", JSON.stringify(data))
+            }
+           
             closeButton.addEventListener("click", () => {
                 dialog.close(); 
+                if(statused == 201){
+                    window.location.href = "./page/accueilComp.html"
+                }
                 // if(status == 200){
                 //     window.location.href = "../loginComp.html"
                 // }
             });
 
         })
-        .catch((err)=> console.log(err))
+        .catch((err)=> console.log(err.msg))
 
 
 
