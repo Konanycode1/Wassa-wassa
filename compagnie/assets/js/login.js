@@ -4,53 +4,60 @@ $(document).ready(()=>{
     const closeButton = document.getElementById("closeDialog");
     const dialog = document.getElementById("basicDialog");
 
-    $('#loginform').on("submit",(e)=>{
-        e.preventDefault();
-
-        let email = $("#email").val();
-        let password = $("#password").val();
-
-        let data = {
-            email: email,
-            password: password
-        }
-        fetch(api,{
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type":"application/json"
+    let user = localStorage.getItem('user')
+    user = JSON.parse(user)
+    if(user == null){
+        $('#loginform').on("submit",(e)=>{
+            e.preventDefault();
+    
+            let email = $("#email").val();
+            let password = $("#password").val();
+    
+            let data = {
+                email: email,
+                password: password
             }
-        })
-        .then((response)=>{
-            localStorage.setItem("logStatus",response.status)
-            return response.json()
-        }
-        )
-        .then((data)=>{
-            dialog.showModal();
-            let statused = localStorage.getItem('logStatus')
-            console.log(data)
-            $(".msg").text(data.msg).css('color', 'green')
-
-            if( statused == 201){
-                $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
-                localStorage.setItem("user", JSON.stringify(data))
-            }
-           
-            closeButton.addEventListener("click", () => {
-                dialog.close(); 
-                if(statused == 201){
-                    window.location.href = "./page/accueilComp.html"
+            fetch(api,{
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type":"application/json"
                 }
-                // if(status == 200){
-                //     window.location.href = "../loginComp.html"
-                // }
-            });
-
+            })
+            .then((response)=>{
+                localStorage.setItem("logStatus",response.status)
+                return response.json()
+            }
+            )
+            .then((data)=>{
+                dialog.showModal();
+                let statused = localStorage.getItem('logStatus')
+                console.log(data)
+                $(".msg").text(data.msg).css('color', 'green')
+    
+                if( statused == 201){
+                    $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
+                    localStorage.setItem("user", JSON.stringify(data))
+                }
+               
+                closeButton.addEventListener("click", () => {
+                    dialog.close(); 
+                    if(statused == 201){
+                        window.location.href = "./page/accueilComp.html"
+                    }
+                });
+    
+            })
+            .catch((err)=> console.log(err.msg))
+    
+    
+    
         })
-        .catch((err)=> console.log(err.msg))
+    }
+    else{
+        window.location.href = "./page/accueilComp.html"
+    }
+    console.log(user)
 
-
-
-    })
+   
 })
