@@ -26,7 +26,7 @@ $(document).ready(()=>{
         $(".msg").text("Veuillez remplir tout les champs").css("color", "red")
     }
     else{
-        fetch(publi,{
+        fetch(api,{
             method: "POST",
             headers: {
                 "authorization": `token ${userVerif.token}`,
@@ -58,6 +58,45 @@ $(document).ready(()=>{
        })
     }
  })
+
+ listePublication();
+ function listePublication() {
+    console.log(userVerif)
+    let liste = `http://localhost:3000/api/readidPubCom/`
+    let apiList = `https://wassa.onrender.com/api/readidPubCom/`
+
+    fetch(apiList, {
+        method:"GET",
+        headers: {
+            "authorization": `token ${userVerif.token}`,
+            "Content-Type":"application/json"
+        }
+    })
+    .then((res)=> res.json())
+    .then((data)=> {
+        data.map(ele => {
+            let text = `
+            <tr>
+                <th scope="row">${ele.numeroCNI}</th>
+                <td>${ele.nomPrenomchauff}</td>
+                <td>${ele.numeroChauff}</td>
+                <th>${ele.ligneDepart}</th>
+                <td>${ele.ligneArrive}</td>
+                <td>${ele.espace}</td>
+                <td>${ele.espaceRestant}</td>
+                <td>${ele.heureDepart.split("T")[0]} ${ele.heureDepart.split("T")[1]}</td>
+                <td>
+                <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i></button>
+                <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                </td>
+            </tr>
+            `
+            $('#listPu').append(text)
+        })
+    })
+    .catch((error)=> console.log(error))  
+ }
 
 
  

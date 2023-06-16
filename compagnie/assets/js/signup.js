@@ -30,7 +30,7 @@ const dialog = document.getElementById("basicDialog");
         data.append("logo",logo)
         data.append("password",password)
         if(password == Cpassword){
-            fetch(api, {
+            fetch(url, {
                 method: "POST",
                 body: data, 
             })

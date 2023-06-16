@@ -20,6 +20,7 @@
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <link href="../assets/css/style.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -27,18 +28,18 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="index.html" class="logo d-flex align-items-center">
-      <img src="assets/img/logo.png" alt="">
+      <img src="../assets/img/logoW.png" alt="">
       <span class="d-none d-lg-block">Wassa Wassa</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div><!-- End Logo -->
+  </div>
 
   <div class="search-bar">
     <form class="search-form d-flex align-items-center" method="POST" action="#">
       <input type="text" name="query" placeholder="Search" title="Enter search keyword">
       <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
-  </div><!-- End Search Bar -->
+  </div>
 
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
@@ -47,14 +48,14 @@
         <a class="nav-link nav-icon search-bar-toggle " href="#">
           <i class="bi bi-search"></i>
         </a>
-      </li><!-- End Search Icon-->
+      </li>
 
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <span class="badge bg-primary badge-number">4</span>
-        </a><!-- End Notification Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
@@ -120,16 +121,16 @@
             <a href="#">Show all notifications</a>
           </li>
 
-        </ul><!-- End Notification Dropdown Items -->
+        </ul>
 
-      </li><!-- End Notification Nav -->
+      </li> -->
 
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-chat-left-text"></i>
           <span class="badge bg-success badge-number">3</span>
-        </a><!-- End Messages Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
           <li class="dropdown-header">
@@ -186,21 +187,20 @@
             <a href="#">Show all messages</a>
           </li>
 
-        </ul><!-- End Messages Dropdown Items -->
-
-      </li><!-- End Messages Nav -->
+        </ul>
+      </li> -->
 
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          <img src="" alt="Profile" class="rounded-circle logoimg">
+          <span class="d-none d-md-block dropdown-toggle ps-2 nameUser"></span>
         </a><!-- End Profile Iamge Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Kevin Anderson</h6>
-            <span>Web Designer</span>
+            <h6 class="nameUser">Kevin Anderson</h6>
+            <span>Compagnie</span>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -209,7 +209,7 @@
           <li>
             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
               <i class="bi bi-person"></i>
-              <span>My Profile</span>
+              <span>Profile</span>
             </a>
           </li>
           <li>
@@ -219,7 +219,7 @@
           <li>
             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
               <i class="bi bi-gear"></i>
-              <span>Account Settings</span>
+              <span>Parametre</span>
             </a>
           </li>
           <li>
@@ -229,7 +229,7 @@
           <li>
             <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
               <i class="bi bi-question-circle"></i>
-              <span>Need Help?</span>
+              <span>Besoin d'aide?</span>
             </a>
           </li>
           <li>
@@ -239,15 +239,15 @@
           <li>
             <a class="dropdown-item d-flex align-items-center" href="#">
               <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
+              <span>Deconnexion</span>
             </a>
           </li>
 
-        </ul><!-- End Profile Dropdown Items -->
-      </li><!-- End Profile Nav -->
+        </ul>
+      </li>
 
     </ul>
-  </nav><!-- End Icons Navigation -->
+  </nav>
 
 </header>
 <aside id="sidebar" class="sidebar">
@@ -314,7 +314,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Data Liste publication</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -326,7 +326,6 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Liste des Publications effectuées</h5>
@@ -334,49 +333,29 @@
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Start Date</th>
+                    <th scope="col">numéro CNI</th>
+                    <th scope="col">Nom et Prénom C</th>
+                    <th scope="col">Numéro C</th>
+                    <th scope="col">Ligne départ</th>
+                    <th scope="col">Ligne Arrivée</th>
+                    <th scope="col">Espace total</th>
+                    <th scope="col">Espace restant</th>
+                    <th scope="col">Heure et Date Départ</th>
+                    <th>delete</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="listPu">
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>2016-05-25</td>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Bridie Kessler</td>
-                    <td>Developer</td>
-                    <td>35</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Ashleigh Langosh</td>
-                    <td>Finance</td>
-                    <td>45</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Angus Grady</td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Raheem Lehner</td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                  </tr>
+                 
+                
+                 
+                
                 </tbody>
               </table>
             </div>
@@ -396,6 +375,8 @@
     </div>
   </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="../assets/js/authentic.js"></script>
+  <script src="../assets/js/publier.js"></script>
   <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/chart.js/chart.umd.js"></script>

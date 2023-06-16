@@ -7,7 +7,7 @@ $(document).ready(()=>{
     let compagnie = `http://localhost:3000/api/compagnieReadId/${user.userId}`
     let api = `https://wassa.onrender.com/api/compagnieReadId/${user.userId}`
 
-    fetch(compagnie,{
+    fetch(api,{
         method: "GET",
         headers: {
            "authorization": `token ${user.token}`,
@@ -23,6 +23,7 @@ $(document).ready(()=>{
     .then((data)=> {
         $('.logoimg').attr("src",`${data.data.logo}`)
         $(".nameUser").text(`${data.data.compagnie}`)
+        
     })
     .catch((err)=> console.log(err))
 

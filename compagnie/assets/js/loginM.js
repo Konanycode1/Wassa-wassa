@@ -1,20 +1,20 @@
 $(document).ready(()=>{
-    let url = "https://wassa.onrender.com/api/compagnieLogin/"
-    let api = "http://localhost:3000/api/compagnieLogin/"
+    let url = "https://wassa.onrender.com/api/commercantLogin/"
+    let api = "http://localhost:3000/api/commercantLogin/"
     const closeButton = document.getElementById("closeDialog");
     const dialog = document.getElementById("basicDialog");
 
-    let user = localStorage.getItem('user')
+    let user = localStorage.getItem('userMarch')
     user = JSON.parse(user)
     if(user == null){
-        $('#loginform').on("submit",(e)=>{
+        $('.loginMarch').on("submit",(e)=>{
             e.preventDefault();
     
-            let email = $("#email").val();
+            let numero = $("#numero").val();
             let password = $("#password").val();
     
             let data = {
-                email: email,
+                numero: numero,
                 password: password
             }
             fetch(url,{
@@ -37,27 +37,24 @@ $(document).ready(()=>{
     
                 if( statused == 201){
                     $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
-                    localStorage.setItem("user", JSON.stringify(data))
+                    localStorage.setItem("userMarch", JSON.stringify(data))
                 }
                
                 closeButton.addEventListener("click", () => {
                     dialog.close(); 
                     if(statused == 201){
-                        window.location.href = "./page/accueilComp.html"
+                        window.location.href = "./page/accueilMarch.html" 
                     }
                 });
     
             })
-            .catch((err)=> console.log(err.msg))
-    
-    
+            .catch((err)=> console.log(err.msg)) 
     
         })
     }
     else{
-        window.location.href = "./page/accueilComp.html"
+        window.location.href = "./page/accueilMarch.html";
     }
-    console.log(user)
 
    
 })
