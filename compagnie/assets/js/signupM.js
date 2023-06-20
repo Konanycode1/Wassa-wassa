@@ -22,7 +22,6 @@ const dialog = document.getElementById("basicDialog");
         let logo = $("#logo").get(0).files[0];
         let password = $("#password").val();
         let Cpassword = $("#Cpassword").val();
-         
         
             if(password == Cpassword){
                 data.append("nom", nom)

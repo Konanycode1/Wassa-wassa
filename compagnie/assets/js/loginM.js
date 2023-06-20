@@ -27,8 +27,7 @@ $(document).ready(()=>{
             .then((response)=>{
                 localStorage.setItem("logStatus",response.status)
                 return response.json()
-            }
-            )
+            })
             .then((data)=>{
                 dialog.showModal();
                 let statused = localStorage.getItem('logStatus')
@@ -46,10 +45,8 @@ $(document).ready(()=>{
                         window.location.href = "./page/accueilMarch.html" 
                     }
                 });
-    
             })
             .catch((err)=> console.log(err.msg)) 
-    
         })
     }
     else{
