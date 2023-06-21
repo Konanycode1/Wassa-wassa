@@ -14,25 +14,7 @@
     let compagnieloca = `http://localhost:3000/api/compagnieReadId/`
     let isFound = false;
     
-    function allComm() {
-        
-        fetch(allcom,{
-            method:"GET"
-        })
-        .then((res)=> res.json())
-        .then((data)=>{
-            let count = 0
-            for(let i = 0; i <data.commande.length;i++ ){
-                if(i.idClient == userMarch.userId){
-                    count++
-                }
-                return count
-            } 
-            $("span #badgeCom").text("ok")
-        })
-        .catch((err)=>console.log(err))  
-    }
-    allComm()
+    allComm(userMarch.userId)
     $("#commander").on("submit",(e)=>{
         e.preventDefault()
     })
@@ -110,6 +92,7 @@
         .catch((error)=>{
             console.log(error)
         })
+       
     })
 
     function btnCommande(event) {
@@ -136,6 +119,31 @@
             console.log(err)
         })   
     }
+
+    function allComm(key) {
+        
+        console.log(key)
+        fetch(allcom,{
+            method:"GET"
+        })
+        .then((res)=> res.json())
+        .then((data)=>{
+            let count = []
+            for(let i = 0; i <data.commande.length;i++ ){
+                if(i.idClient == key){
+                    alert("ok")
+                    console.log(i.idClient)
+                    count.push(i.idClient)
+                    
+                } 
+            }
+            console.log(count)
+            let badg = document.getElementById('badgeCom')
+            console.log(badg)
+        })
+        .catch((err)=>console.log(err))  
+    }
+
     
 
    

@@ -52,6 +52,4 @@ $(document).ready(()=>{
     else{
         window.location.href = "./page/accueilMarch.html";
     }
-
-   
 })
