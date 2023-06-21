@@ -25,6 +25,7 @@ $(document).ready(()=>{
                 }
             })
             .then((response)=>{
+                
                 localStorage.setItem("logStatus",response.status)
                 return response.json()
             }

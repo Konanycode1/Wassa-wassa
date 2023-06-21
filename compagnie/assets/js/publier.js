@@ -35,6 +35,10 @@ $(document).ready(()=>{
             body: JSON.stringify(data)
        })
        .then((res)=>{
+            if(res.redirected){
+                window.location.href = "../loginComp.html"
+                localStorage.removeItem("user")
+            }
             localStorage.setItem('publier',res.status)
             return res.json()
         })
@@ -72,9 +76,16 @@ $(document).ready(()=>{
             "Content-Type":"application/json"
         }
     })
-    .then((res)=> res.json())
+    .then((res)=> {
+        if(res.redirected){
+            window.location.href = "../loginComp.html"
+            localStorage.removeItem("user")
+        }
+        return res.json()
+    })
     .then((data)=> {
         data.map(ele => {
+            console.log(ele._id)
             let text = `
             <tr>
                 <th scope="row">${ele.numeroCNI}</th>

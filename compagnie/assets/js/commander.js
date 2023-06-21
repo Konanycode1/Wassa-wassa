@@ -13,8 +13,6 @@
     let allpubid = `https://wassa.onrender.com/api/readidPub/`
     let compagnieloca = `http://localhost:3000/api/compagnieReadId/`
     let isFound = false;
-    
-    allComm(userMarch.userId)
     $("#commander").on("submit",(e)=>{
         e.preventDefault()
     })
@@ -31,7 +29,7 @@
             numeroExp: numeroExp,
             depart: depart
         }
-
+        $(".msg").text("Veuillez choisir votre ligne SVP !!")
         fetch(allpub,{
             method: "GET",
             headers: {
@@ -57,6 +55,7 @@
               .then((res)=>{
                 if(res.redirected){
                     window.location.href = "../loginMarch.html"
+                    localStorage.removeItem("userMarch")
                 }
                 return res.json()
               })
@@ -80,6 +79,7 @@
                            </td>
                        </tr>
                      `
+                     $(".table-hover").css("display","block")
                      $(".pub").append(text)
                     }
                 
@@ -110,38 +110,25 @@
             }
         })
         .then((res)=> {
+            if(res.redirected){
+                window.location.href = "../loginMarch.html"
+                localStorage.removeItem("userMarch")
+            }
             return res.json()
         })
         .then((data)=>{
-            console.log(data.msg)
+
+            let text = `
+                <h2 class="card-text">
+                ${data.msg}
+                </h2>
+            `
+            $('.encour').append(text)
+            $(".table-hover").css("display","none")
         })
         .catch((err)=>{
             console.log(err)
         })   
-    }
-
-    function allComm(key) {
-        
-        console.log(key)
-        fetch(allcom,{
-            method:"GET"
-        })
-        .then((res)=> res.json())
-        .then((data)=>{
-            let count = []
-            for(let i = 0; i <data.commande.length;i++ ){
-                if(i.idClient == key){
-                    alert("ok")
-                    console.log(i.idClient)
-                    count.push(i.idClient)
-                    
-                } 
-            }
-            console.log(count)
-            let badg = document.getElementById('badgeCom')
-            console.log(badg)
-        })
-        .catch((err)=>console.log(err))  
     }
 
     

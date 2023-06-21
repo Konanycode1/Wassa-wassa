@@ -17,6 +17,7 @@ $(document).ready(()=>{
     .then((res)=>{
         if(res.redirected){
             window.location.href = "../loginComp.html"
+            localStorage.removeItem("user")
         }
         return res.json()
     })
