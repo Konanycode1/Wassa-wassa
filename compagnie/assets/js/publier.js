@@ -88,6 +88,7 @@ $(document).ready(()=>{
             console.log(ele._id)
             let text = `
             <tr>
+                <td style="display:none;">${ele._id}</td>
                 <th scope="row">${ele.numeroCNI}</th>
                 <td>${ele.nomPrenomchauff}</td>
                 <td>${ele.numeroChauff}</td>
@@ -97,7 +98,7 @@ $(document).ready(()=>{
                 <td>${ele.espaceRestant}</td>
                 <td>${ele.heureDepart.split("T")[0]} ${ele.heureDepart.split("T")[1]}</td>
                 <td>
-                <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i></button>
+                <button type="button" class="btn btn-success" onclick="AnnulerPub(event)"><i class="bi bi-check-circle"></i></button>
                 <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
                 <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                 </td>
@@ -108,8 +109,12 @@ $(document).ready(()=>{
     })
     .catch((error)=> console.log(error))  
  }
-
-
- 
-
 })
+
+function AnnulerPub(event) {
+    let parent = []
+        let idCom = []
+        parent.push(event.target.closest("tr"))
+        idCom.push(parent[0].children[0].innerHTML)
+        console.log("btnvali",idCom)  
+}

@@ -31,6 +31,7 @@ $(document).ready(()=>{
                 .then((res)=> res.json())
                 .then((commercant)=>{
                     commercant.com.map(ele => {
+                        
                         if(ele._id == item.idClient && item.status == 0 && item.idCompa ==user.userId ){
                             let text =`
                                 <tr>
@@ -48,6 +49,23 @@ $(document).ready(()=>{
                                     </td>
                                 </tr>`
                                 $(".listeCom").append(text)
+                        }
+                        else if(ele._id == item.idClient && item.status == -1 || item.status == 1  && item.idCompa == user.userId ){
+                            let text =`
+                                <tr>
+                                    <th scope="row">${item._id}</th>
+                                    <td>${ele.nom} ${ele.prenom}</td>
+                                    <td>${item.nomPrenomExp}</td>
+                                    <td>${item.depart}</td>
+                                    <td>${item.destination}</td>
+                                    <td>${item.numeroExp}</td>
+                                    <td>${item.nombreProduit}</td>
+                                    <td>${ele.numero}</td>
+                                    <td> 
+                                    ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider</span>'}
+                                    </td>
+                                </tr>`
+                                $(".Comterm").append(text)
                         }
                     })
                 })
