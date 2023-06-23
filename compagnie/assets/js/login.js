@@ -31,34 +31,24 @@ $(document).ready(()=>{
             }
             )
             .then((data)=>{
-                dialog.showModal();
+                // dialog.showModal();
                 let statused = localStorage.getItem('logStatus')
-                console.log(data)
                 $(".msg").text(data.msg).css('color', 'green')
-    
                 if( statused == 201){
                     $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
                     localStorage.setItem("user", JSON.stringify(data))
-                }
-               
-                closeButton.addEventListener("click", () => {
-                    dialog.close(); 
-                    if(statused == 201){
+                    setTimeout(()=>{
                         window.location.href = "./page/accueilComp.html"
-                    }
-                });
-    
+                    },3000)
+                }
+                else{
+                    $(".msg").text("erreur de connexion").css('color', 'red');
+                }
             })
             .catch((err)=> console.log(err.msg))
-    
-    
-    
         })
     }
     else{
         window.location.href = "./page/accueilComp.html"
-    }
-    console.log(user)
-
-   
+    } 
 })

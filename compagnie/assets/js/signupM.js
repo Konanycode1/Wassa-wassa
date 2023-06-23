@@ -32,7 +32,6 @@ const dialog = document.getElementById("basicDialog");
                 data.append("profession",profession)
                 data.append("logo",logo)
                 data.append("password",password)
-                console.log(data.get("logo"))
                 fetch(url, {
                     method: "POST",
                     body: data, 
@@ -44,13 +43,16 @@ const dialog = document.getElementById("basicDialog");
                 .then((data)=> {
                     const status = localStorage.getItem("status")
                     $(".msg").text(data.msg).css('color', 'green')
-                    dialog.showModal();
-                    closeButton.addEventListener("click", () => {
-                        dialog.close(); 
-                        if(status == 200){
-                            window.location.href = "../loginMarch.html"
-                        }
-                    }); 
+                    setTimeout(()=>{
+                        window.location.href = "../loginMarch.html"
+                    },2000)
+                    // dialog.showModal();
+                    // closeButton.addEventListener("click", () => {
+                    //     dialog.close(); 
+                    //     if(status == 200){
+                    //         window.location.href = "../loginMarch.html"
+                    //     }
+                    // }); 
                 })
                 .catch((err)=> console.log(err))
             }

@@ -40,14 +40,19 @@ const dialog = document.getElementById("basicDialog");
             })
             .then((data)=> {
                 const status = localStorage.getItem("status")
-                dialog.showModal();
+                // dialog.showModal();
                 $(".msg").text(data.msg).css('color', 'green')
-                closeButton.addEventListener("click", () => {
-                    dialog.close(); 
-                    if(status == 200){
-                        window.location.href = "../loginComp.html"
-                    }
-                }); 
+
+                setTimeout(()=>{
+                    window.location.href = "../loginComp.html"
+                },2000)
+
+                // closeButton.addEventListener("click", () => {
+                //     dialog.close(); 
+                //     if(status == 200){
+                //         window.location.href = "../loginComp.html"
+                //     }
+                // }); 
             })
             .catch((err)=> console.log(err))
         }

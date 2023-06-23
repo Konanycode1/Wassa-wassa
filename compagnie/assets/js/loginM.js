@@ -29,7 +29,7 @@ $(document).ready(()=>{
                 return response.json()
             })
             .then((data)=>{
-                dialog.showModal();
+                // dialog.showModal();
                 let statused = localStorage.getItem('logStatus')
                 console.log(data)
                 $(".msg").text(data.msg).css('color', 'green')
@@ -37,14 +37,17 @@ $(document).ready(()=>{
                 if( statused == 201){
                     $(".msg").text("Connexion encours, Veuillez patienter").css('color', 'green');
                     localStorage.setItem("userMarch", JSON.stringify(data))
+                    setTimeout(()=>{
+                        window.location.href = "./page/accueilMarch.html" 
+                    },3000)
                 }
                
-                closeButton.addEventListener("click", () => {
-                    dialog.close(); 
-                    if(statused == 201){
-                        window.location.href = "./page/accueilMarch.html" 
-                    }
-                });
+                // closeButton.addEventListener("click", () => {
+                //     dialog.close(); 
+                //     if(statused == 201){
+                //         window.location.href = "./page/accueilMarch.html" 
+                //     }
+                // });
             })
             .catch((err)=> console.log(err.msg)) 
         })

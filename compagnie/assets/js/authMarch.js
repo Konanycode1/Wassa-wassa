@@ -38,10 +38,10 @@ $(document).ready(()=>{
   })
   .then((res)=>{return res.json()})
   .then((data)=>{
-    console.log(data)
+    // console.log(data)
     data.commande.map(ele=> {
       if(ele.idClient == userMarch.userId){
-        console.log(ele)
+        // console.log(ele)
       }
     })
   })
@@ -49,3 +49,4 @@ $(document).ready(()=>{
 
 
 })
+
