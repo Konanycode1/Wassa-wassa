@@ -4,7 +4,8 @@ $(document).ready(()=>{
     let allcom = `https://wassa.onrender.com/api/allcommande/`
     let allpub = `https://wassa.onrender.com/api/readAllPub/`
     let allCommercant = `https://wassa.onrender.com/api/`
-        
+    
+    commderVal() 
     let count = 0
     if(user == null){
         window.location.href = "../loginComp.html";
@@ -50,23 +51,23 @@ $(document).ready(()=>{
                                 </tr>`
                                 $(".listeCom").append(text)
                         }
-                        else if(ele._id == item.idClient && item.status == -1 || item.status == 1  && item.idCompa == user.userId ){
-                            let text =`
-                                <tr>
-                                    <th scope="row">${item._id}</th>
-                                    <td>${ele.nom} ${ele.prenom}</td>
-                                    <td>${item.nomPrenomExp}</td>
-                                    <td>${item.depart}</td>
-                                    <td>${item.destination}</td>
-                                    <td>${item.numeroExp}</td>
-                                    <td>${item.nombreProduit}</td>
-                                    <td>${ele.numero}</td>
-                                    <td> 
-                                    ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider</span>'}
-                                    </td>
-                                </tr>`
-                                $(".Comterm").append(text)
-                        }
+                        // if(ele._id == item.idClient && item.status <0 || item.status >0 && item.idCompa == user.userId ){
+                        //     let text =`
+                        //         <tr>
+                        //             <th scope="row">${item._id}</th>
+                        //             <td>${ele.nom} ${ele.prenom}</td>
+                        //             <td>${item.nomPrenomExp}</td>
+                        //             <td>${item.depart}</td>
+                        //             <td>${item.destination}</td>
+                        //             <td>${item.numeroExp}</td>
+                        //             <td>${item.nombreProduit}</td>
+                        //             <td>${ele.numero}</td>
+                        //             <td> 
+                        //             ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider</span>'}
+                        //             </td>
+                        //         </tr>`
+                        //         $(".Comterm").append(text)
+                        // }
                     })
                 })
                 .catch((err)=> console.log(err))          
@@ -149,5 +150,68 @@ function annuler(event){
         })
         .catch((err)=> console.log(err))
     }
+    
+}
+
+function commderVal() {
+
+    let user = localStorage.getItem("user")
+    user = JSON.parse(user)
+    let allcom = `https://wassa.onrender.com/api/allcommande/`
+    let allpub = `https://wassa.onrender.com/api/readAllPub/`
+    let allCommercant = `https://wassa.onrender.com/api/`
+        
+    let count = 0
+    if(user == null){
+        window.location.href = "../loginComp.html";
+    }
+    else{
+        fetch(allcom,{
+            method:"GET"
+        })
+        .then((res)=> {
+            if(res.redirected){
+                window.location.href = "../loginComp.html"
+                localStorage.removeItem("user")
+            }
+            return res.json()
+        })
+        .then((data)=>{
+            data.commande.map(item =>{
+                fetch(allCommercant, {
+                    method: "GET",
+                    headers:{
+                        "Content-Type":"application/json"
+                    }
+                })
+                .then((res)=> res.json())
+                .then((commercant)=>{
+                    commercant.com.map(ele => {
+                        if(ele._id == item.idClient && item.status !=0 && item.idCompa == user.userId ){
+                            console.log(ele)
+                            let text =`
+                                <tr>
+                                    <th scope="row">${item._id}</th>
+                                    <td>${ele.nom} ${ele.prenom}</td>
+                                    <td>${item.nomPrenomExp}</td>
+                                    <td>${item.depart}</td>
+                                    <td>${item.destination}</td>
+                                    <td>${item.numeroExp}</td>
+                                    <td>${item.nombreProduit}</td>
+                                    <td>${ele.numero}</td>
+                                    <td> 
+                                    ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider</span>'}
+                                    </td>
+                                </tr>`
+                                $(".Comterm").append(text)
+                        }
+                    })
+                })
+                .catch((err)=> console.log(err))          
+            })
+        })
+        .catch((err)=>console.log(err))  
+    }
+
     
 }
