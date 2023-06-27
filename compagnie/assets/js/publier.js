@@ -96,7 +96,7 @@ $(document).ready(()=>{
                 <td>${ele.espaceRestant}</td>
                 <td>${ele.heureDepart.split("T")[0]} ${ele.heureDepart.split("T")[1]}</td>
                 <td>
-                <button type="button" class="btn btn-success" onclick="ArrivagePub(event)"><i class="bi bi-check-circle"></i></button>
+                <button type="button" class="btn btn-success" onclick="arrivagePub(event)"><i class="bi bi-check-circle"></i></button>
                 <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
                 <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                 </td>
@@ -109,15 +109,15 @@ $(document).ready(()=>{
  }
 })
 
-function  ArrivagePub(event) {
- 
+function  arrivagePub(event) {
+ console.log(event.target)
     let parent = []
         let idCom = []
         parent.push(event.target.closest("tr"))
         idCom.push(parent[0].children[0].innerHTML)
         console.log("btnvali",userVerif.token)  
-
-        fetch(`http://localhost:3000/api/terminer/${idCom[0]}`,
+        console.log(idCom)
+        fetch(`https://wassa.onrender.com/api/terminer/${idCom[0]}`,
         {
             method:"GET",
             headers: {
