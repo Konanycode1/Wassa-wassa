@@ -95,13 +95,7 @@ function CommandeStatus() {
             return res.json()
         })
         .then((data)=>{
-            for(let i = 0; i <data.commande.length;i++ ){
-                if(data.commande[i].idClient == userMarch.userId && data.commande[i].status == 0){
-                   count+=1    
-                }  
-            }
-            $('#badgeCom').text(count)
-            
+           
             data.commande.map(item =>{
                 
                 fetch(compagnie, {
@@ -119,7 +113,7 @@ function CommandeStatus() {
                             .then((res)=> res.json())
                             .then((pub)=>{
                                 pub.data.map((pu)=>{
-                                    if( pu._id == item.idPub && pu.compagnie == ele._id && item.status == 1 || item.status == -1){
+                                    if( pu._id == item.idPub && pu.compagnie == ele._id && item.status !=0){
                                         let text =`
                                         <tr>
                                             <th scope="row">${item._id}</th>
@@ -128,10 +122,9 @@ function CommandeStatus() {
                                             <td>${item.destination}</td>
                                             <td>${item.nombreProduit}</td>
                                             <td>${pu.numeroChauff}</td>
-                                            <td>${pu.heureDepart}</td>
+                                            <td>${pu.heureDepart.split("T")[0]} à ${pu.heureDepart.split("T")[1]}</td>
                                             <td> 
-                                            <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                                            <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                            ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider et encours</span>'}
                                             </td>
                                         </tr>
                                         `

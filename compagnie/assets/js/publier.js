@@ -22,7 +22,7 @@ $(document).ready(()=>{
         espace:$("#espace").val()
     }
 
-    if(data.matricule =="" ||data.nomPrenomChauff =="" || data.numeroChauff =="" || data.numeroCNI =="" || data.ligneDepart =="" || data.ligneArrive =="" || data.heureDepart =="" || data.espace ==""){
+    if(data.matricule =="" || data.nomPrenomchauff =="" || data.numeroChauff =="" || data.numeroCNI =="" || data.ligneDepart =="" || data.ligneArrive =="" || data.heureDepart =="" || data.espace ==""){
         $(".msg").text("Veuillez remplir tout les champs").css("color", "red")
     }
     else{
@@ -65,7 +65,6 @@ $(document).ready(()=>{
 
  listePublication();
  function listePublication() {
-    console.log(userVerif)
     let liste = `http://localhost:3000/api/readidPubCom/`
     let apiList = `https://wassa.onrender.com/api/readidPubCom/`
 
@@ -85,7 +84,6 @@ $(document).ready(()=>{
     })
     .then((data)=> {
         data.map(ele => {
-            console.log(ele._id)
             let text = `
             <tr>
                 <td style="display:none;">${ele._id}</td>
@@ -98,7 +96,7 @@ $(document).ready(()=>{
                 <td>${ele.espaceRestant}</td>
                 <td>${ele.heureDepart.split("T")[0]} ${ele.heureDepart.split("T")[1]}</td>
                 <td>
-                <button type="button" class="btn btn-success" onclick="AnnulerPub(event)"><i class="bi bi-check-circle"></i></button>
+                <button type="button" class="btn btn-success" onclick="ArrivagePub(event)"><i class="bi bi-check-circle"></i></button>
                 <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
                 <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                 </td>
@@ -111,10 +109,24 @@ $(document).ready(()=>{
  }
 })
 
-function AnnulerPub(event) {
+function  ArrivagePub(event) {
+ 
     let parent = []
         let idCom = []
         parent.push(event.target.closest("tr"))
         idCom.push(parent[0].children[0].innerHTML)
-        console.log("btnvali",idCom)  
+        console.log("btnvali",userVerif.token)  
+
+        fetch(`http://localhost:3000/api/terminer/${idCom[0]}`,
+        {
+            method:"GET",
+            headers: {
+                "authorization": `token ${userVerif.token}` 
+            }
+        })
+        .then((res)=>res.json())
+        .then((data)=> {
+            console.log(data.msg)
+        })
+        .catch((err)=> console.log(err))
 }
