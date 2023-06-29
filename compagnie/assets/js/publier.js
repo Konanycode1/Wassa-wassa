@@ -96,9 +96,8 @@ $(document).ready(()=>{
                 <td>${ele.espaceRestant}</td>
                 <td>${ele.heureDepart.split("T")[0]} ${ele.heureDepart.split("T")[1]}</td>
                 <td>
-                <button type="button" class="btn btn-success" onclick="arrivagePub(event)"><i class="bi bi-check-circle"></i></button>
-                <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                ${ele.status == 0? '<button type="button" class="btn btn-success" onclick="arrivagePub(event)"><i class="bi bi-check-circle"></i></button><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>': '<button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>'}
+                
                 </td>
             </tr>
             `

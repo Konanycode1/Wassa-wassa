@@ -5,10 +5,12 @@ $(document).ready(()=>{
     let allpub = `https://wassa.onrender.com/api/readAllPub/`
     let allCommercant = `https://wassa.onrender.com/api/`
     let count = 0
+    $(".fermer").css("display","none")
     if(user == null){
         window.location.href = "../loginMarch.html";
     }
     else{
+       
         fetch(allpub,{
             method: "GET",  
         })
@@ -21,7 +23,7 @@ $(document).ready(()=>{
         })
         .then((pub)=>{
             pub.data.map((publi)=>{
-                
+                console.log("pub",publi)
                 fetch(allcom,{
                     method:"GET"
                 })
@@ -31,26 +33,23 @@ $(document).ready(()=>{
                 })
                 .then((data)=>{
                     data.commande.map(comm =>{
-                                  
-                                if(user.userId == comm.idClient){
-                                    console.log("pub",publi)
-                                    console.log("comm",comm)
-                                    // let text =`
-                                    //     <tr>
-                                    //         <th scope="row">${item._id}</th>
-                                    //         <td>${ele.nom} ${ele.prenom}</td>
-                                    //         <td>${item.nomPrenomExp}</td>
-                                    //         <td>${item.depart}</td>
-                                    //         <td>${item.destination}</td>
-                                    //         <td>${item.numeroExp}</td>
-                                    //         <td>${item.nombreProduit}</td>
-                                    //         <td>${ele.numero}</td>
-                                    //         <td> 
-                                    //         <button type="button" class="btn btn-success" onclick="valide(event)"><i class="bi bi-check-circle"></i></button>
-                                    //         <button type="button" class="btn btn-danger" onclick="annuler(event)"><i class="bi bi-exclamation-octagon"></i></button>
-                                    //         </td>
-                                    //     </tr>`
-                                        // $(".listeCom").append(text)
+                        console.log("pub",publi)
+                        console.log("comm",comm)
+                                if(user.userId == comm.idClient && publi.statut == 1 && publi._id == comm.idPub){
+                                    $('.fermer').css("display",'block')
+                                    let text =`
+                                        <tr>
+                                            <th scope="row" >${publi.numeroCNI}</th>
+                                            <td>${publi.nomPrenomchauff}</td>
+                                            <td>${publi.ligneDepart}</td>
+                                            <td>${publi.ligneArrive}</td>
+                                            <td>${parseInt(publi.espace.split(' ')[0]) - publi.espaceRestant }</td>
+                                            <td>${publi.numeroChauff}</td>
+                                            <td>
+                                            <span class="badge bg-warning ">Arrivée</span>
+                                            </td>
+                                        </tr>`
+                                        $(".arrivageP").append(text)
                                 }         
                     })
                 })

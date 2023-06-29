@@ -36,7 +36,7 @@ $(document).ready(()=>{
                         if(ele._id == item.idClient && item.status == 0 && item.idCompa ==user.userId ){
                             let text =`
                                 <tr>
-                                    <th scope="row">${item._id}</th>
+                                    <th scope="row" style="display:none;">${item._id}</th>
                                     <td>${ele.nom} ${ele.prenom}</td>
                                     <td>${item.nomPrenomExp}</td>
                                     <td>${item.depart}</td>
@@ -191,7 +191,7 @@ function commderVal() {
                             console.log(ele)
                             let text =`
                                 <tr>
-                                    <th scope="row">${item._id}</th>
+                                    <th scope="row" style="display:none;">${item._id}</th>
                                     <td>${ele.nom} ${ele.prenom}</td>
                                     <td>${item.nomPrenomExp}</td>
                                     <td>${item.depart}</td>
