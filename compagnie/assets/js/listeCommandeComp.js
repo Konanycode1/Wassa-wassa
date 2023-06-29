@@ -188,7 +188,6 @@ function commderVal() {
                 .then((commercant)=>{
                     commercant.com.map(ele => {
                         if(ele._id == item.idClient && item.status !=0 && item.idCompa == user.userId ){
-                            console.log(ele)
                             let text =`
                                 <tr>
                                     <th scope="row" style="display:none;">${item._id}</th>

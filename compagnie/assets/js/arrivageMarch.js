@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-    let user = localStorage.getItem("user")
+    let user = localStorage.getItem("userMarch")
     user = JSON.parse(user)
     let allcom = `https://wassa.onrender.com/api/allcommande/`
     let allpub = `https://wassa.onrender.com/api/readAllPub/`
@@ -7,7 +7,7 @@ $(document).ready(()=>{
     let count = 0
     $(".fermer").css("display","none")
     if(user == null){
-        window.location.href = "../loginComp.html";
+        window.location.href = "../loginMarch.html";
     }
     else{
        
@@ -17,7 +17,7 @@ $(document).ready(()=>{
         .then((res)=> {
             if(res.redirected){
                 window.location.href = "../loginComp.html"
-                localStorage.removeItem("user")
+                localStorage.removeItem("userMarch")
             }
             return res.json()
         })
@@ -31,9 +31,11 @@ $(document).ready(()=>{
                     return res.json()
                 })
                 .then((data)=>{
+                   
                     data.commande.map(comm =>{
-                                if(user.userId == comm.idCompa && publi.statut == 1 && publi._id == comm.idPub){
-                                    $('.fermer').css("display",'block')
+                        
+                                if(user.userId == comm.idClient && publi.statut == 1 && publi._id == comm.idPub){
+                                    $('.fermer').css("display",'block');
                                     let text =`
                                         <tr>
                                             <th scope="row" >${publi.numeroCNI}</th>

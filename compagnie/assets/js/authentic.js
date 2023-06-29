@@ -43,6 +43,7 @@ $(document).ready(()=>{
 function Commande(user){
    let count = 0
    let countValide = 0
+  
     let api = `https://wassa.onrender.com/api/allCommande/`
     fetch(api,{method: "GET"})
     .then((res)=> res.json())
@@ -58,10 +59,13 @@ function Commande(user){
        })
        $(".nombreCom").text(count)
        $('.valideCom').text(countValide)
+      
        let estim = count*100/20
-       let estimVali = countValide*100/countValide
+       let estimVali = countValide*100/count
+      
        $('.estimCom').text(`${estim} %`)
        $('.estimVali').text(`${estimVali} %`)
+      
        
     })
     .catch((err)=>console.log(err))
@@ -127,8 +131,6 @@ function ActionRecent(data, user){
 }
 
 function ColisArriver(user){
-
-    console.log(user.token)
     let api = "https://wassa.onrender.com/api/readidPubCom/"
     console.log(user)
     fetch(api, {method: "GET", 

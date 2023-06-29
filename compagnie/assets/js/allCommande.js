@@ -111,12 +111,8 @@ function CommandeStatus() {
                                 method: "GET",
                             })
                             .then((res)=> res.json())
-                            .then((pu)=>{
-                                // console.log(ele._id,pu.compagnie  )
-                                       
+                            .then((pu)=>{   
                                 pu.data.map((pu)=>{
-                                    console.log("pu",pu)
-                                    console.log("item",item)
                                     if( pu._id == item.idPub && pu.compagnie == ele._id && item.status !=0){
                                         
                                         let text =`
