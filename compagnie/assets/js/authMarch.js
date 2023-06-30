@@ -48,6 +48,11 @@ $(document).ready(()=>{
   })
   .catch((err)=>console.log(err))
 
+  $(".deco").on("click",()=>{
+    localStorage.removeItem("user")
+    window.location.href = "../loginMarch.html"
+})
+
 
 })
 
