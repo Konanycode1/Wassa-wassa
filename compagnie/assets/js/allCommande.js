@@ -125,7 +125,7 @@ function CommandeStatus() {
                                             <td>${pu.numeroChauff}</td>
                                             <td>${pu.heureDepart.split("T")[0]} à ${pu.heureDepart.split("T")[1]}</td>
                                             <td> 
-                                            ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider et encours</span>'}
+                                            ${item.status == -1 ? '<span class="badge bg-danger ">Annuler</span>':'<span class="badge bg-success">Valider</span>'}
                                             </td>
                                         </tr>
                                         `
