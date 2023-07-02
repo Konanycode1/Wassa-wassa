@@ -21,12 +21,12 @@ $(document).ready(()=>{
         heureDepart:$("#heureDepart").val(),
         espace:$("#espace").val()
     }
-
+    console.log(data.espace)
     if(data.matricule =="" || data.nomPrenomchauff =="" || data.numeroChauff =="" || data.numeroCNI =="" || data.ligneDepart =="" || data.ligneArrive =="" || data.heureDepart =="" || data.espace ==""){
         $(".msg").text("Veuillez remplir tout les champs").css("color", "red")
     }
     else{
-        fetch(api,{
+        fetch(publi,{
             method: "POST",
             headers: {
                 "authorization": `token ${userVerif.token}`,
@@ -43,15 +43,16 @@ $(document).ready(()=>{
             return res.json()
         })
        .then((data)=>{
-        dialog.showModal();
+       
         let pub = localStorage.getItem("publier")
         $(".msg").text(data.msg).css('color', 'green');
-        closeButton.addEventListener("click", () => {
-            dialog.close(); 
-            if(pub == 200){
+
+        if(pub == 200){
+            setTimeout(()=>{
                 window.location.reload()
-            } 
-        });
+            },2000)
+           
+        } 
        })
        .catch((error)=>{
         dialog.showModal();
