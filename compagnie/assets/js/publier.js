@@ -26,7 +26,7 @@ $(document).ready(()=>{
         $(".msg").text("Veuillez remplir tout les champs").css("color", "red")
     }
     else{
-        fetch(publi,{
+        fetch(api,{
             method: "POST",
             headers: {
                 "authorization": `token ${userVerif.token}`,
